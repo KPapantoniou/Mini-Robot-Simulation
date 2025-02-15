@@ -3,12 +3,12 @@ using namespace std;
 
 Simulation::Simulation(double step, int iterations, Motor& motor1,Motor& motor2, ForceCalculator& forceCalc, Robot& robot_single, Robot& robot_double)
     : step(step), iterations(iterations), motor1(&motor1), motor2(&motor2), forceCalc(forceCalc), robot_single(&robot_single), robot_double(&robot_double){
-    // std::cout << "Simulation using motor with address: " << &motor << "\n";
+   
 }
 
 
 void Simulation::run(){
-    // vector<double> theta_values, omega_values, time_values,f2_y,f2_z, f_y, f_z, total_force_x_values, total_force_z_values, pos_x, vel_x, accel_x, theta_rotation, moments_x, moments_z,pos_y;
+  
     ofstream file("D:\\panepistimio\\Thesis\\Micro-robot\\code\\simulation\\results_motor.csv");
     ofstream file1("D:\\panepistimio\\Thesis\\Micro-robot\\code\\simulation\\results_robot_single.csv");
     ofstream file2("D:\\panepistimio\\Thesis\\Micro-robot\\code\\simulation\\results_robot.csv");
@@ -30,27 +30,19 @@ void Simulation::run(){
     for(int iteration = 0; iteration<iterations; iteration++){
         double t = iteration * step;
         
-        // cout << "Iteration: " << iteration << " Time: " << t << endl;
+       
 
         double fy = forceCalc.horizontal_centrifugal_force(motor1->get_omega(), motor1->get_theta(), t);
         double fz = forceCalc.vertical_centrifugal_force(motor1->get_omega(), motor1->get_theta(), t);
         double f2y = forceCalc.horizontal_centrifugal_force(motor2->get_omega(), motor2->get_theta(), t);
         double f2z = forceCalc.vertical_centrifugal_force(motor2->get_omega(), motor2->get_theta(), t);
 
-        // cout << "Motor1: " << motor1->get_omega() << ", " << motor1->get_theta() << endl;
-        // cout << "Motor2: " << motor2->get_omega() << ", " << motor2->get_theta() << endl;
+
         // Singular motor for robot
         double pos1 = robot_single->get_pos_x();
         double vel1 = robot_single->get_vel_x();
         double accel1 = robot_single->get_acc_x();
         auto friction_forces = robot_single->calculate_single_motor(t, step);
-
-        // cout << "Robot Single: Pos_x: " << pos1 << ", Vel_x: " << vel1 << ", Acc_x: " << accel1 << endl;
-
-        // robot_single->calculate_single_motor(t, step);
-
-  
-        
         
         // Asynchronous motors for robot
         double pos2_x = robot_double->get_pos_x();
@@ -59,8 +51,7 @@ void Simulation::run(){
         double accel2 = robot_double->get_acc_x();
         auto forces = robot_double->calculate_asynchronous_movement(t, step);
 
-        // cout << "Robot Double: Pos_x: " << pos2_x << ", Pos_y: " << pos2_y << ", Vel_x: " << vel2 << endl;
-
+    
         //write to file
         file << 
             t << "," <<
