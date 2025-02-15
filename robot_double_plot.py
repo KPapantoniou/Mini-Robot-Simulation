@@ -1,0 +1,67 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = pd.read_csv("D:\\panepistimio\\Thesis\\Micro-robot\\code\\simulation\\results_robot.csv")
+
+plt.figure(figsize=(10, 5))
+plt.subplot(4, 2, 1)
+plt.plot(data["Time"], data["Moment_x"], label="Torque X (Nm)", color='blue')
+plt.plot(data["Time"], data["Moment_z"], label="Torque Y (Nm)", color='red',linestyle='dashed')
+plt.xlabel("Time (ms)")
+plt.ylabel("Torque (Nm)")
+plt.title("Torque Over Time")
+plt.grid()
+
+plt.subplot(4, 2, 2)
+plt.plot(data["Time"], data["Force_X_Motors"], label="Force X (N)", color='blue')
+plt.plot(data["Time"], data["Force_Z_Motors"], label="Force Y (N)", color='red',linestyle='dashed')
+plt.xlabel("Time (ms)")
+plt.ylabel("Force (N)")
+plt.title("Force Over Time")
+plt.grid()
+
+plt.subplot(4, 2, 3)
+plt.plot(data["Time"], data["Pos_x"], label="Position X (m)", color='blue')
+plt.xlabel("Time (ms)")
+plt.ylabel("Position (m)")
+plt.title("Position X Over Time")
+plt.grid()
+
+plt.subplot(4, 2, 4)
+plt.plot(data["Time"], data["Vel_x"], label="Velocity X (m/s)", color='red')
+plt.xlabel("Time (ms)")    
+plt.ylabel("Velocity (m/s)")
+plt.title("Velocity X Over Time")
+plt.grid()
+
+plt.subplot(4, 2, 5)
+plt.plot(data["Time"], data["Acc_x"], label="Acceleration X (m/s^2)", color='green')
+plt.xlabel("Time (ms)")
+plt.ylabel("Acceleration (m/s^2)")
+plt.title("Acceleration X Over Time")
+plt.grid()
+
+plt.subplot(4, 2, 6)
+plt.plot(data["Time"], data["Theta_displacement"], label="Theta Displacement (rad)", color='orange')
+plt.xlabel("Time (ms)")
+plt.ylabel("Theta (rad)")
+plt.title("Theta Displacement Over Time")
+plt.grid()
+
+plt.subplot(4, 2, 7)
+plt.plot(data["Time"], data["Pos_y"], label="Position Y (m)", color='blue')
+plt.xlabel("Time (ms)")
+plt.ylabel("Position (m)")
+plt.title("Position Y Over Time")
+plt.grid()
+
+plt.subplot(4, 2, 8)
+plt.plot(data["Pos_y"], data["Pos_x"], label="Position Y (m)", color='blue')
+plt.xlabel("X-axis (m)")
+plt.ylabel("Y-axis (m)")
+plt.title("Position Y Over X")
+plt.grid()
+
+plt.tight_layout()
+plt.show()
+# Plotting position, velocity, and acceleration over theta (angular position of motors)
